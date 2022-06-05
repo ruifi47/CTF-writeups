@@ -1,5 +1,7 @@
 # __Puppeteer__
 
+### __Challenge Info__
+
 > Planet Longhir is known for it's top-tier researchers. Due to their dedication in science and engineering, their military equipment is the most advanced one in the galaxy. In fact, the prototype DES-3000, a self-propelled precision-strike missile that is capable of reaching targets even in Ratnik galaxy, is being used to disable Galactic Federation's communication satellites. The mystery that Miyuki is trying to solve is, how the satellite's location was leaked since it is a top-sercret that only Galactic Federation's council is aware of. Help her analyse the Council's HQ event logs and solve this mystery.
 
 <br>
@@ -60,18 +62,18 @@ Looking at the end of the script, we can see how the `special orders` are unpack
 Let's make some changes to the script to get the `$stage3` output after the XOR operations.
 
 ```powershell
-$stage1 = 0x99, 0x85, 0x93, 0xaa, 0xb3, 0xe2, 0xa6, 0xb9, 0xe5, 0xa3, 0xe2, 0x8e, 0xe1, 0xb7, 0x8e, 0xa5, 0xb9, 0xe2, 0x8e, 0xb3
+$stage1 = 0x99, 0x85, 0x93, 0xaa, 0xb3, 0xe2, 0xa6, 0xb9, 0xe5, 0xa3, 0xe2, 0x8e, 0xe1, 0xb7, 0x8e, 0xa5, 0xb9, 0xe2, 0x8e, 0xb3;
 
-$stage2 = 0xac, 0xff, 0xff, 0xff, 0xe2, 0xb2, 0xe0, 0xa5, 0xa2, 0xa4, 0xbb, 0x8e, 0xb7, 0xe1, 0x8e, 0xe4, 0xa5, 0xe1, 0xe1
-[array]::Reverse($stage2)
+$stage2 = 0xac, 0xff, 0xff, 0xff, 0xe2, 0xb2, 0xe0, 0xa5, 0xa2, 0xa4, 0xbb, 0x8e, 0xb7, 0xe1, 0x8e, 0xe4, 0xa5, 0xe1, 0xe1;
+[array]::Reverse($stage2);
 
-$stage3 = $stage1 + $stage2
+$stage3 = $stage1 + $stage2;
 
 for($i=0;$i -lt $stage3.count;$i++){
     $stage3[$i] = $stage3[$i] -bxor 0xd1;
 }
 
-echo $stage3
+echo $stage3;
 ```
 
 Now let's execute the modified script, piping the output with [Format-Hex](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/format-hex?view=powershell-7.2. "Format-Hex")
